@@ -19,23 +19,21 @@ public class RasporedKursaServiceImpl implements RasporedKursaService {
 
     private final RasporedKursaRepository rasporedKursaRepository;
     private final RasporedKursaConverter rasporedKursaConverter;
-    private final GrupaServiceImpl grupaService;
+
 
     @Autowired
-    public RasporedKursaServiceImpl(RasporedKursaRepository rasporedKursaRepository, RasporedKursaConverter rasporedKursaConverter, GrupaServiceImpl grupaService) {
+    public RasporedKursaServiceImpl(RasporedKursaRepository rasporedKursaRepository, RasporedKursaConverter rasporedKursaConverter) {
         this.rasporedKursaRepository = rasporedKursaRepository;
         this.rasporedKursaConverter = rasporedKursaConverter;
-        this.grupaService = grupaService;
+
     }
 
     @Override
     public RasporedKursaDto dodajRaspored(RasporedKursaDto rasporedKursaDto) {
-//        GrupaEntity grupa = new GrupaEntity();
-//        int id = grupaService.vratiMaksId();
-//        grupa.setIdGrupe(id);
+
 
         RasporedKursaEntity raspored = rasporedKursaConverter.toEntity(rasporedKursaDto);
-//        raspored.setGrupa(grupa);
+
 
 
         return rasporedKursaConverter.toDto(rasporedKursaRepository.save(raspored));

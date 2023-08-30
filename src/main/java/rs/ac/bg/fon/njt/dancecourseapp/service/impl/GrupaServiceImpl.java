@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rs.ac.bg.fon.njt.dancecourseapp.converter.GrupaConverter;
 import rs.ac.bg.fon.njt.dancecourseapp.dao.GrupaRepository;
-import rs.ac.bg.fon.njt.dancecourseapp.dao.RasporedKursaRepository;
 import rs.ac.bg.fon.njt.dancecourseapp.dto.GrupaDto;
+import rs.ac.bg.fon.njt.dancecourseapp.dto.RasporedKursaDto;
 import rs.ac.bg.fon.njt.dancecourseapp.exception.InvalidEntityException;
 import rs.ac.bg.fon.njt.dancecourseapp.model.GrupaEntity;
 import rs.ac.bg.fon.njt.dancecourseapp.model.RasporedKursaEntity;
@@ -22,13 +22,13 @@ public class GrupaServiceImpl implements GrupaService {
     private final GrupaRepository grupaRepository;
     private final GrupaConverter grupaConverter;
 
-    private final RasporedKursaRepository rasporedKursaRepository;
+    private final RasporedKursaServiceImpl rasporedKursaService;
 
     @Autowired
-    public GrupaServiceImpl(GrupaRepository grupaRepository, GrupaConverter grupaConverter, RasporedKursaRepository rasporedKursaRepository) {
+    public GrupaServiceImpl(GrupaRepository grupaRepository, GrupaConverter grupaConverter, RasporedKursaServiceImpl rasporedKursaService) {
         this.grupaRepository = grupaRepository;
         this.grupaConverter = grupaConverter;
-        this.rasporedKursaRepository = rasporedKursaRepository;
+        this.rasporedKursaService = rasporedKursaService;
     }
 
     @Override
@@ -40,11 +40,15 @@ public class GrupaServiceImpl implements GrupaService {
         }
         GrupaDto entity = grupaConverter.toDto(grupaRepository.save(grupa));
         List<RasporedKursaEntity> rasporedi = grupa.getRasporediKurseva();
-        //ovde moras da dodas za dodavanje rasporeda kurseva njen repozitory koji ce da dodaje rasporede u bazu
+        if(rasporedi==null){
+            System.out.println("rasporeda nema u grupi entity");
+        }
+        //ovde moras da dodas za dodavanje rasporeda kurseva njen service koji ce da dodaje rasporede u bazu
 
-        for (RasporedKursaEntity rs: rasporedi
+        for (RasporedKursaDto rs: grupaDto.getRasporediKurseva()
         ) {
-            rasporedKursaRepository.save(rs);
+            rs.setGrupa(entity);
+            rasporedKursaService.dodajRaspored(rs);
         }
         return entity;
     }
