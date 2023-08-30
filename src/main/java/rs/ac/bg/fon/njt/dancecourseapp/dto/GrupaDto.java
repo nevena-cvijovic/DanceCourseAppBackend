@@ -29,11 +29,12 @@ public class GrupaDto implements ApplicationDto{
 
     }
 
-    public GrupaDto(int idGrupe, String nazivGrupe, Date datumPocetkaKursa, KursDto kurs) {
+    public GrupaDto(int idGrupe, String nazivGrupe, Date datumPocetkaKursa, KursDto kurs, List<RasporedKursaDto> rasporediKurseva) {
         this.idGrupe = idGrupe;
         this.nazivGrupe = nazivGrupe;
         this.datumPocetkaKursa = datumPocetkaKursa;
         this.kurs = kurs;
+        this.rasporediKurseva = rasporediKurseva;
     }
 
     public int getIdGrupe() {
