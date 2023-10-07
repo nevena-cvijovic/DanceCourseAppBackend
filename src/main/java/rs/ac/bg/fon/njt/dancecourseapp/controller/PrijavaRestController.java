@@ -21,16 +21,13 @@ public class PrijavaRestController {
         this.prijavaService = prijavaService;
     }
 
-    //metode
 
-    //vracanje svih prijava iz baze
     @GetMapping("/all")
     public ResponseEntity<List<PrijavaDto>> vratiSvePrijave(){
         List<PrijavaDto> prijave = prijavaService.nadjiSvePrijave();
         return new ResponseEntity<>(prijave, HttpStatus.OK);
     }
 
-    //ubacivanje u bazu
     @PostMapping("/add")
     public ResponseEntity<Object> dodajPrijavu(@Valid @RequestBody PrijavaDto prijavaDto){
 
@@ -42,7 +39,6 @@ public class PrijavaRestController {
         }
     }
 
-    //update
 
     @PutMapping("/update")
     public ResponseEntity<Object> izmeniPrijavu(@RequestBody PrijavaDto prijavaDto){
@@ -50,7 +46,6 @@ public class PrijavaRestController {
         return new ResponseEntity<>(prijava,HttpStatus.OK);
     }
 
-    //delete
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> obrisiPrijavu(@PathVariable("id") PrijavaId id){
         try{

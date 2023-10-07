@@ -15,15 +15,13 @@ import java.util.List;
 @RequestMapping("/ples")
 public class PlesRestController {
 
-
-    //dodavanje ples service-a ovoj klasi
     private final PlesServiceImpl plesService;
 
     public PlesRestController(PlesServiceImpl plesService) {
         this.plesService = plesService;
     }
 
-    //metoda koja vraca sve plesove iz baze
+
     @GetMapping("/all")
     public ResponseEntity<List<PlesDto>> vratiSvePlesove(){
         //pomocu servisa iz baze izvlacimo sve plesove i smestamo u listu plesova
@@ -33,8 +31,6 @@ public class PlesRestController {
     }
 
 
-
-    //metoda za ubacivanje novog plesa u bazu
     @PostMapping("/add")
     // objekat dat u json formatu i stavljamo posebnu anotaciju za ovaj parametar
     public ResponseEntity<Object> dodajPles(@Valid @RequestBody PlesDto plesDto){
@@ -48,9 +44,6 @@ public class PlesRestController {
     }
 
 
-
-    //metoda za update-ovanje podataka o plesu
-
     @PutMapping("/update")
     public ResponseEntity<Object> izmeniPles(@RequestBody PlesDto plesDto){
         try {
@@ -62,7 +55,7 @@ public class PlesRestController {
         }
     }
 
-    //metoda za brisanje plesa
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> obrisiPles(@PathVariable("id") int id){
         try{

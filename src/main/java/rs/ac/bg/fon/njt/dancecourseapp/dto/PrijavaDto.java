@@ -6,7 +6,7 @@ import java.sql.Date;
 
 public class PrijavaDto implements ApplicationDto{
 
-    @NotNull
+
     private KorisnikDto korisnik;
     @NotNull
     private KursDto kurs;

@@ -9,14 +9,11 @@ import java.util.Optional;
 
 public interface KorisnikRepository extends JpaRepository<KorisnikEntity, Integer> {
 
-    //ovde nam treba da vrati po korisnickom imenu i mejlu
-    //za registraciju
+
     @Query("SELECT k FROM KorisnikEntity k WHERE k.korisnickoIme = ?1 AND k.mejl = ?2")
     List<KorisnikEntity> nadjiPoKorisnickomImenuIMejlu(String username, String email);
 
 
-    //za logovanje
-    @Query("SELECT kor FROM KorisnikEntity kor WHERE kor.korisnickoIme= ?1 AND kor.lozinka=?2")
-    Optional< KorisnikEntity> uloguj(String username, String password);
+    Optional<KorisnikEntity> findByKorisnickoIme(String login);
 
 }

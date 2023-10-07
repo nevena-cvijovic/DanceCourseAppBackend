@@ -2,6 +2,7 @@ package rs.ac.bg.fon.njt.dancecourseapp.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import rs.ac.bg.fon.njt.dancecourseapp.converter.MapStruct;
 import rs.ac.bg.fon.njt.dancecourseapp.converter.PrijavaConverter;
 import rs.ac.bg.fon.njt.dancecourseapp.dao.PrijavaRepository;
 import rs.ac.bg.fon.njt.dancecourseapp.dto.PrijavaDto;
@@ -17,32 +18,32 @@ import java.util.stream.Collectors;
 public class PrijavaServiceImpl implements PrijavaService {
 
     private final PrijavaRepository prijavaRepository;
-    private final PrijavaConverter prijavaConverter;
+    private final PrijavaConverter mapper;
 
     @Autowired
-    public PrijavaServiceImpl(PrijavaRepository prijavaRepository, PrijavaConverter prijavaConverter) {
+    public PrijavaServiceImpl(PrijavaRepository prijavaRepository, PrijavaConverter mapper) {
         this.prijavaRepository = prijavaRepository;
-        this.prijavaConverter = prijavaConverter;
+        this.mapper = mapper;
     }
 
 
     //CRUD
     @Override
     public PrijavaDto dodajPrijavu(PrijavaDto prijavaDto) {
-        PrijavaEntity prijava = prijavaConverter.toEntity(prijavaDto);
-        return prijavaConverter.toDto(prijavaRepository.save(prijava));
+        PrijavaEntity prijava = mapper.toEntity(prijavaDto);
+        return mapper.toDto(prijavaRepository.save(prijava));
     }
 
     @Override
     public List<PrijavaDto> nadjiSvePrijave() {
         List<PrijavaEntity> prijave = prijavaRepository.findAll();
-        return prijave.stream().map(prijavaConverter::toDto).collect(Collectors.toList());
+        return prijave.stream().map(mapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public PrijavaDto izmeniPrijavu(PrijavaDto prijavaDto) {
-        PrijavaEntity prijava = prijavaConverter.toEntity(prijavaDto);
-        return prijavaConverter.toDto(prijavaRepository.save(prijava));
+        PrijavaEntity prijava = mapper.toEntity(prijavaDto);
+        return mapper.toDto(prijavaRepository.save(prijava));
     }
 
     @Override
@@ -61,7 +62,7 @@ public class PrijavaServiceImpl implements PrijavaService {
     public Optional<PrijavaDto> findById(PrijavaId id) {
         Optional<PrijavaEntity> prijava = prijavaRepository.findById(id);
         if(prijava.isPresent()){
-            return Optional.of(prijavaConverter.toDto(prijava.get()));
+            return Optional.of(mapper.toDto(prijava.get()));
         }
         return Optional.empty();
     }

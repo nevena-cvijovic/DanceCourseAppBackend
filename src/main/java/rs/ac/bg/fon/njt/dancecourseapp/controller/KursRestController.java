@@ -21,16 +21,13 @@ public class KursRestController {
     }
 
 
-    //metode
-
-    //vracanje svih kurseva iz baze
     @GetMapping("/all")
     public ResponseEntity<List<KursDto>> vratiSveKurseve(){
         List<KursDto> kursevi = kursService.nadjiSveKurseve();
         return new ResponseEntity<>(kursevi, HttpStatus.OK);
     }
 
-    //metoda za ubacivanje novog kursa u bazu
+
     @PostMapping("/add")
     public ResponseEntity<Object> dodajKurs(@Valid @RequestBody KursDto kursDto){
         try{
@@ -41,7 +38,6 @@ public class KursRestController {
         }
     }
 
-    //metoda za update-ovanje podataka o kursu
     @PutMapping("/update")
     public ResponseEntity<Object> izmeniKurs(@RequestBody KursDto kursDto){
         try{
@@ -54,7 +50,6 @@ public class KursRestController {
     }
 
 
-    //metoda za brisanje plesa
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> obrisiKurs(@PathVariable("id") int id){
         try{

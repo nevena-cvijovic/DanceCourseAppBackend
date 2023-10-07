@@ -11,28 +11,28 @@ public class KorisnikDto implements ApplicationDto{
 
     private int idKorisnika;
 
-    @NotNull(message = "Ime korisnika Required field")
+
     private String ime;
 
-    @NotNull(message = "Prezime korisnika Required field")
+
     private String prezime;
 
-    @NotNull(message = "datum rodjenja Required field")
+
     private Date datumRodjenja;
 
-    @NotNull(message = "kontakt telefon Required field")
+
     private String kontaktTelefon;
 
     @Email
-    @NotNull(message = " mejl Required field")
+
     private String mejl;
 
-    @NotNull(message = "korisnicko ime Required field")
+
     private String korisnickoIme;
 
-    @Size(min = 7 , message = "Password must contain min 7 characters!")
-    @NotNull(message = "lozinka Required field")
-    private String lozinka;
+
+
+    private String token;
 
     public KorisnikDto() {
         System.out.println("====================================================");
@@ -40,7 +40,7 @@ public class KorisnikDto implements ApplicationDto{
         System.out.println("====================================================");
     }
 
-    public KorisnikDto(int idKorisnika, String ime, String prezime, Date datumRodjenja, String kontaktTelefon, String mejl, String korisnickoIme, String lozinka) {
+    public KorisnikDto(int idKorisnika, String ime, String prezime, Date datumRodjenja, String kontaktTelefon, String mejl, String korisnickoIme, String token) {
         this.idKorisnika = idKorisnika;
         this.ime = ime;
         this.prezime = prezime;
@@ -48,7 +48,7 @@ public class KorisnikDto implements ApplicationDto{
         this.kontaktTelefon = kontaktTelefon;
         this.mejl = mejl;
         this.korisnickoIme = korisnickoIme;
-        this.lozinka = lozinka;
+        this.token = token;
     }
 
     public int getIdKorisnika() {
@@ -107,11 +107,11 @@ public class KorisnikDto implements ApplicationDto{
         this.korisnickoIme = korisnickoIme;
     }
 
-    public String getLozinka() {
-        return lozinka;
+    public String getToken() {
+        return token;
     }
 
-    public void setLozinka(String lozinka) {
-        this.lozinka = lozinka;
+    public void setToken(String token) {
+        this.token = token;
     }
 }
